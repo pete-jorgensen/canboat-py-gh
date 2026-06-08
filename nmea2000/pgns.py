@@ -313,6 +313,68 @@ master_dict = {
         1862: "Yamaha Marine",
         1863: "Faria Instruments",
     },
+    'CZONE_ALARM_TYPE': {
+        1: "AC Voltage Error",
+        2: "AC Frequency Error",
+        3: "AC High Power",
+        4: "DC Low Voltage",
+        5: "DC Very Low Voltage",
+        6: "DC High Voltage",
+        7: "DC Low Battery Capacity",
+        10: "Out of Range",
+        11: "Low Run Current",
+        12: "Over Current",
+        13: "Short Circuit",
+        14: "Missing Commander",
+        15: "Reverse Current",
+        16: "Calibration Error",
+        17: "Missing Output",
+        18: "Systems On",
+        19: "AC Very High Power",
+        20: "AC Low Power",
+        21: "DC Very Low Battery Capacity",
+        22: "Battery Full",
+        23: "DC Load Shed Low",
+        24: "DC Load Shed Very Low",
+        25: "AC Load Shed Low",
+        26: "AC Load Shed Very Low",
+        27: "Reverse Polarity",
+        28: "Manual Override",
+        29: "Mastervolt",
+        30: "Hardware Fault",
+        31: "No AC Supply",
+        34: "PGN Switching On",
+        35: "Low Canbus Voltage",
+        36: "Blown Fuse",
+        37: "Manual Bypass",
+        38: "Generic Alarm",
+        39: "Battery Temperature Alarm",
+        40: "Temperature Sensor Error",
+        41: "AC IN Out Of Range",
+        42: "Device In Overload",
+        43: "High Temperature",
+        44: "Inverter/Charger Installation Error",
+        45: "Inverter Installation Error",
+        46: "Charger Installation Error",
+        47: "Cable Voltage Drop Too High",
+        48: "Shunt mistmatch",
+        49: "Cooling Fan Error",
+        50: "Mastershunt Fuse Blown",
+        51: "High Temperature",
+        52: "Over Pressure",
+        53: "Low Pressure",
+        54: "Rapid Deflation",
+        55: "Inverter/Charger Over Temperature",
+        56: "Confirm On",
+        57: "Battery Safety",
+        58: "Stop Charging",
+        59: "Check Battery Relay",
+        60: "Battery Hardware Failure",
+        61: "Battery Over Current",
+        62: "Battery Temperature Low",
+        63: "Battery Temperature High",
+        64: "Battery Last 100",
+    },
     'AIS_MESSAGE_ID': {
         1: "Scheduled Class A position report",
         2: "Assigned scheduled Class A position report",
@@ -1632,6 +1694,18 @@ master_dict = {
     'SIMNET_AP_STATUS': {
         2: "Manual",
         16: "Automatic",
+    },
+    'SIMNET_AUTOPILOT_MODE_CLASS': {
+        0: "Standby",
+        16: "Engaged",
+    },
+    'SIMNET_AUTOPILOT_MODE': {
+        0: "Standby",
+        1: "Heading",
+        3: "Mode 4",
+        4: "Wind",
+        5: "Non-Follow-Up",
+        6: "Navigation",
     },
     'SIMNET_COMMAND': {
         50: "Text",
@@ -3100,6 +3174,74 @@ def lookup_encode_MANUFACTURER_CODE(value):
     result = lookup_dict_encode_MANUFACTURER_CODE.get(value, None)
     if result is None:
         raise ValueError(f"Cant encode this message, {value} is missing from MANUFACTURER_CODE")
+    return result
+
+lookup_dict_encode_CZONE_ALARM_TYPE = {
+    "AC Voltage Error" : 1,
+    "AC Frequency Error" : 2,
+    "AC High Power" : 3,
+    "DC Low Voltage" : 4,
+    "DC Very Low Voltage" : 5,
+    "DC High Voltage" : 6,
+    "DC Low Battery Capacity" : 7,
+    "Out of Range" : 10,
+    "Low Run Current" : 11,
+    "Over Current" : 12,
+    "Short Circuit" : 13,
+    "Missing Commander" : 14,
+    "Reverse Current" : 15,
+    "Calibration Error" : 16,
+    "Missing Output" : 17,
+    "Systems On" : 18,
+    "AC Very High Power" : 19,
+    "AC Low Power" : 20,
+    "DC Very Low Battery Capacity" : 21,
+    "Battery Full" : 22,
+    "DC Load Shed Low" : 23,
+    "DC Load Shed Very Low" : 24,
+    "AC Load Shed Low" : 25,
+    "AC Load Shed Very Low" : 26,
+    "Reverse Polarity" : 27,
+    "Manual Override" : 28,
+    "Mastervolt" : 29,
+    "Hardware Fault" : 30,
+    "No AC Supply" : 31,
+    "PGN Switching On" : 34,
+    "Low Canbus Voltage" : 35,
+    "Blown Fuse" : 36,
+    "Manual Bypass" : 37,
+    "Generic Alarm" : 38,
+    "Battery Temperature Alarm" : 39,
+    "Temperature Sensor Error" : 40,
+    "AC IN Out Of Range" : 41,
+    "Device In Overload" : 42,
+    "High Temperature" : 43,
+    "Inverter/Charger Installation Error" : 44,
+    "Inverter Installation Error" : 45,
+    "Charger Installation Error" : 46,
+    "Cable Voltage Drop Too High" : 47,
+    "Shunt mistmatch" : 48,
+    "Cooling Fan Error" : 49,
+    "Mastershunt Fuse Blown" : 50,
+    "High Temperature" : 51,
+    "Over Pressure" : 52,
+    "Low Pressure" : 53,
+    "Rapid Deflation" : 54,
+    "Inverter/Charger Over Temperature" : 55,
+    "Confirm On" : 56,
+    "Battery Safety" : 57,
+    "Stop Charging" : 58,
+    "Check Battery Relay" : 59,
+    "Battery Hardware Failure" : 60,
+    "Battery Over Current" : 61,
+    "Battery Temperature Low" : 62,
+    "Battery Temperature High" : 63,
+    "Battery Last 100" : 64,
+}
+def lookup_encode_CZONE_ALARM_TYPE(value):
+    result = lookup_dict_encode_CZONE_ALARM_TYPE.get(value, None)
+    if result is None:
+        raise ValueError(f"Cant encode this message, {value} is missing from CZONE_ALARM_TYPE")
     return result
 
 lookup_dict_encode_AIS_MESSAGE_ID = {
@@ -5272,6 +5414,30 @@ def lookup_encode_SIMNET_AP_STATUS(value):
     result = lookup_dict_encode_SIMNET_AP_STATUS.get(value, None)
     if result is None:
         raise ValueError(f"Cant encode this message, {value} is missing from SIMNET_AP_STATUS")
+    return result
+
+lookup_dict_encode_SIMNET_AUTOPILOT_MODE_CLASS = {
+    "Standby" : 0,
+    "Engaged" : 16,
+}
+def lookup_encode_SIMNET_AUTOPILOT_MODE_CLASS(value):
+    result = lookup_dict_encode_SIMNET_AUTOPILOT_MODE_CLASS.get(value, None)
+    if result is None:
+        raise ValueError(f"Cant encode this message, {value} is missing from SIMNET_AUTOPILOT_MODE_CLASS")
+    return result
+
+lookup_dict_encode_SIMNET_AUTOPILOT_MODE = {
+    "Standby" : 0,
+    "Heading" : 1,
+    "Mode 4" : 3,
+    "Wind" : 4,
+    "Non-Follow-Up" : 5,
+    "Navigation" : 6,
+}
+def lookup_encode_SIMNET_AUTOPILOT_MODE(value):
+    result = lookup_dict_encode_SIMNET_AUTOPILOT_MODE.get(value, None)
+    if result is None:
+        raise ValueError(f"Cant encode this message, {value} is missing from SIMNET_AUTOPILOT_MODE")
     return result
 
 lookup_dict_encode_SIMNET_COMMAND = {
@@ -21326,7 +21492,7 @@ def is_fast_pgn_65295() -> bool:
     return False
 def decode_pgn_65295(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
     """Decode PGN 65295."""
-    nmea2000Message = NMEA2000Message(PGN=65295, id='bepMarineProprietaryPgn65295', description='BEP Marine: Proprietary PGN 65295')
+    nmea2000Message = NMEA2000Message(PGN=65295, id='bepMarineCzoneAlarm', description='BEP Marine: CZone Alarm')
     running_bit_offset = 0
     # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 295, PartOfPrimaryKey: ,
     running_bit_offset = 0
@@ -21348,11 +21514,54 @@ def decode_pgn_65295(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Messag
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:data | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    # 4:device_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    data = data_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 48))
-    nmea2000Message.fields.append(NMEA2000Field('data', 'Data', None, None, data, data_raw, None, FieldTypes.BINARY, False))
-    running_bit_offset += 48
+    device_id = device_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('deviceId', 'Device ID', "Device / source module id", None, device_id, device_id_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 5:channel | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 24
+    channel = channel_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('channel', 'Channel', "Channel / alarm id low byte", None, channel, channel_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 6:alarm_type | Offset: 32, Length: 16, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 32
+    alarm_type_raw = decode_int(_data_raw_, running_bit_offset, 16)
+    alarm_type = master_dict['CZONE_ALARM_TYPE'].get(alarm_type_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('alarmType', 'Alarm Type', None, None, alarm_type, alarm_type_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 16
+
+    # 7:severity_code | Offset: 48, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 48
+    severity_code = severity_code_raw = decode_number(_data_raw_, running_bit_offset, 4, False, 1, 0, 13)
+    nmea2000Message.fields.append(NMEA2000Field('severityCode', 'Severity Code', "Raw CZone severity code; values 1..5 map to internal severities 4..0", None, severity_code, severity_code_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 4
+
+    # 8:state_flag | Offset: 52, Length: 1, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 52
+    state_flag = state_flag_raw = decode_number(_data_raw_, running_bit_offset, 1, False, 1, 0, 1)
+    nmea2000Message.fields.append(NMEA2000Field('stateFlag', 'State Flag', "State bit used by CZone to distinguish active vs cleared/acknowledged state", None, state_flag, state_flag_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 1
+
+    # 9:ack_flag | Offset: 53, Length: 1, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 53
+    ack_flag = ack_flag_raw = decode_number(_data_raw_, running_bit_offset, 1, False, 1, 0, 1)
+    nmea2000Message.fields.append(NMEA2000Field('ackFlag', 'Ack Flag', "Packed and transmitted by CZone, but receive-side action is not confirmed", None, ack_flag, ack_flag_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 1
+
+    # 10:reserved_54 | Offset: 54, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 54
+    reserved_54 = reserved_54_raw = decode_int(_data_raw_, running_bit_offset, 2)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_54', 'Reserved', None, None, reserved_54, reserved_54_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 2
+
+    # 11:reserved_56 | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 56
+    reserved_56 = reserved_56_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_56', 'Reserved', None, None, reserved_56, reserved_56_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 8
 
     return nmea2000Message
 
@@ -21435,22 +21644,204 @@ def encode_pgn_65295(nmea2000Message: NMEA2000Message) -> bytes:
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # data | Offset: 16, Length: 48, Resolution: 1, Field Type: BINARY
+    # deviceId | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("data")
+    field = nmea2000Message.get_field_by_id("deviceId")
 
     advance_running_offset = True
-    field_bytes = normalize_binary_data(field.raw_value) if isinstance(field.raw_value, (bytes, bytearray, memoryview)) else normalize_binary_data(field.value)
-    field_value = encode_binary_data(field_bytes)
-    field_bit_length = 48
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'Data' cannot be negative")
+        raise ValueError("Cant encode this message, 'Device ID' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Data' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Device ID' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Data' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Device ID' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # channel | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 24
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("channel")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Channel' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Channel' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Channel' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # alarmType | Offset: 32, Length: 16, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 32
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("alarmType")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_CZONE_ALARM_TYPE(field.value)
+    field_bit_length = 16
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Alarm Type' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Alarm Type' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Alarm Type' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # severityCode | Offset: 48, Length: 4, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 48
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("severityCode")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 4, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 4, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 4, False, 1)
+    field_bit_length = 4
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Severity Code' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Severity Code' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Severity Code' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # stateFlag | Offset: 52, Length: 1, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 52
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("stateFlag")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 1, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 1, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 1, False, 1)
+    field_bit_length = 1
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'State Flag' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'State Flag' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'State Flag' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # ackFlag | Offset: 53, Length: 1, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 53
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("ackFlag")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 1, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 1, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 1, False, 1)
+    field_bit_length = 1
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Ack Flag' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Ack Flag' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Ack Flag' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_54 | Offset: 54, Length: 2, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 54
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_54")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 2
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_56 | Offset: 56, Length: 8, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 56
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_56")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -21885,12 +22276,12 @@ def decode_pgn_65299(data_raw: int, data_length_bits: int | None = None) -> NMEA
         ):
         return decode_pgn_65299_suzukiEngineDataB(data_raw, data_length_bits)
     
-    # bepMarineProprietaryPgn65299 | Description: BEP Marine: Proprietary PGN 65299
+    # bepMarineCzoneAlarmStringRequest | Description: BEP Marine: CZone Alarm String Request
     if (
         (((data_raw >> 0) & 0x7FF) == 295) and
         (((data_raw >> 13) & 0x7) == 4)
         ):
-        return decode_pgn_65299_bepMarineProprietaryPgn65299(data_raw, data_length_bits)
+        return decode_pgn_65299_bepMarineCzoneAlarmStringRequest(data_raw, data_length_bits)
     
     
     return None
@@ -22029,9 +22420,9 @@ def encode_pgn_65299_suzukiEngineDataB(nmea2000Message: NMEA2000Message) -> byte
     payload_bit_length = max(payload_bit_length, payload_end_offset)
     return data_raw.to_bytes(8, byteorder="little")
 
-def decode_pgn_65299_bepMarineProprietaryPgn65299(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
+def decode_pgn_65299_bepMarineCzoneAlarmStringRequest(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
     """Decode PGN 65299."""
-    nmea2000Message = NMEA2000Message(PGN=65299, id='bepMarineProprietaryPgn65299', description='BEP Marine: Proprietary PGN 65299')
+    nmea2000Message = NMEA2000Message(PGN=65299, id='bepMarineCzoneAlarmStringRequest', description='BEP Marine: CZone Alarm String Request')
     running_bit_offset = 0
     # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 295, PartOfPrimaryKey: ,
     running_bit_offset = 0
@@ -22053,15 +22444,27 @@ def decode_pgn_65299_bepMarineProprietaryPgn65299(_data_raw_: int, _data_length_
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:data | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    # 4:device_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    data = data_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 48))
-    nmea2000Message.fields.append(NMEA2000Field('data', 'Data', None, None, data, data_raw, None, FieldTypes.BINARY, False))
-    running_bit_offset += 48
+    device_id = device_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('deviceId', 'Device ID', "Device / destination module id associated with the alarm", None, device_id, device_id_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 5:channel | Offset: 24, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 24
+    channel = channel_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
+    nmea2000Message.fields.append(NMEA2000Field('channel', 'Channel', "Channel / alarm id", None, channel, channel_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 16
+
+    # 6:padding | Offset: 40, Length: 24, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 40
+    padding = padding_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 24))
+    nmea2000Message.fields.append(NMEA2000Field('padding', 'Padding', "Set to FF FF FF", None, padding, padding_raw, None, FieldTypes.BINARY, False))
+    running_bit_offset += 24
 
     return nmea2000Message
 
-def encode_pgn_65299_bepMarineProprietaryPgn65299(nmea2000Message: NMEA2000Message) -> bytes:
+def encode_pgn_65299_bepMarineCzoneAlarmStringRequest(nmea2000Message: NMEA2000Message) -> bytes:
     """Encode Nmea2000Message object to binary data for PGN 65299."""
     data_raw = 0
     running_bit_offset = 0
@@ -22140,22 +22543,74 @@ def encode_pgn_65299_bepMarineProprietaryPgn65299(nmea2000Message: NMEA2000Messa
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # data | Offset: 16, Length: 48, Resolution: 1, Field Type: BINARY
+    # deviceId | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("data")
+    field = nmea2000Message.get_field_by_id("deviceId")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Device ID' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Device ID' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Device ID' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # channel | Offset: 24, Length: 16, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 24
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("channel")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 16, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 16, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 16, False, 1)
+    field_bit_length = 16
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Channel' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Channel' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Channel' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # padding | Offset: 40, Length: 24, Resolution: 1, Field Type: BINARY
+    running_bit_offset = 40
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("padding")
 
     advance_running_offset = True
     field_bytes = normalize_binary_data(field.raw_value) if isinstance(field.raw_value, (bytes, bytearray, memoryview)) else normalize_binary_data(field.value)
     field_value = encode_binary_data(field_bytes)
-    field_bit_length = 48
+    field_bit_length = 24
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'Data' cannot be negative")
+        raise ValueError("Cant encode this message, 'Padding' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Data' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Padding' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Data' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Padding' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -22633,7 +23088,7 @@ def is_fast_pgn_65301() -> bool:
     return False
 def decode_pgn_65301(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
     """Decode PGN 65301."""
-    nmea2000Message = NMEA2000Message(PGN=65301, id='bepMarineProprietaryPgn65301', description='BEP Marine: Proprietary PGN 65301')
+    nmea2000Message = NMEA2000Message(PGN=65301, id='bepMarineCzone65301', description='BEP Marine: CZone 65301')
     running_bit_offset = 0
     # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 295, PartOfPrimaryKey: ,
     running_bit_offset = 0
@@ -22655,11 +23110,29 @@ def decode_pgn_65301(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Messag
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:data | Offset: 16, Length: 48, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    # 4:field_1 | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    data = data_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 48))
-    nmea2000Message.fields.append(NMEA2000Field('data', 'Data', None, None, data, data_raw, None, FieldTypes.BINARY, False))
-    running_bit_offset += 48
+    field_1 = field_1_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('field1', 'Field 1', "Pass-through byte; purpose unverified", None, field_1, field_1_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 5:field_2 | Offset: 24, Length: 5, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 24
+    field_2 = field_2_raw = decode_number(_data_raw_, running_bit_offset, 5, False, 1, 0, 29)
+    nmea2000Message.fields.append(NMEA2000Field('field2', 'Field 2', "5-bit field; purpose unverified", None, field_2, field_2_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 5
+
+    # 6:field_3 | Offset: 29, Length: 3, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 29
+    field_3 = field_3_raw = decode_number(_data_raw_, running_bit_offset, 3, False, 1, 0, 6)
+    nmea2000Message.fields.append(NMEA2000Field('field3', 'Field 3', "3-bit field; purpose unverified", None, field_3, field_3_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 3
+
+    # 7:status_bitmap | Offset: 32, Length: 32, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 32
+    status_bitmap = status_bitmap_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 32))
+    nmea2000Message.fields.append(NMEA2000Field('statusBitmap', 'Status Bitmap', "32-bit bitmap, LSB-first; bit n set => item n active. Per-bit meaning unverified.", None, status_bitmap, status_bitmap_raw, None, FieldTypes.BINARY, False))
+    running_bit_offset += 32
 
     return nmea2000Message
 
@@ -22742,22 +23215,100 @@ def encode_pgn_65301(nmea2000Message: NMEA2000Message) -> bytes:
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # data | Offset: 16, Length: 48, Resolution: 1, Field Type: BINARY
+    # field1 | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("data")
+    field = nmea2000Message.get_field_by_id("field1")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field 1' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field 1' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field 1' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # field2 | Offset: 24, Length: 5, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 24
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("field2")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 5, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 5, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 5, False, 1)
+    field_bit_length = 5
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field 2' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field 2' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field 2' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # field3 | Offset: 29, Length: 3, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 29
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("field3")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 3, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 3, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 3, False, 1)
+    field_bit_length = 3
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field 3' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field 3' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field 3' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # statusBitmap | Offset: 32, Length: 32, Resolution: 1, Field Type: BINARY
+    running_bit_offset = 32
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("statusBitmap")
 
     advance_running_offset = True
     field_bytes = normalize_binary_data(field.raw_value) if isinstance(field.raw_value, (bytes, bytearray, memoryview)) else normalize_binary_data(field.value)
     field_value = encode_binary_data(field_bytes)
-    field_bit_length = 48
+    field_bit_length = 32
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'Data' cannot be negative")
+        raise ValueError("Cant encode this message, 'Status Bitmap' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Data' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Status Bitmap' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Data' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Status Bitmap' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -22793,31 +23344,19 @@ def decode_pgn_65302(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Messag
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 4:type | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    a = a_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('a', 'A', None, None, a, a_raw, None, FieldTypes.NUMBER, False))
+    type = type_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('type', 'Type', "Always 0x0A", None, type, type_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 5:b | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:value | Offset: 24, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 24
-    b = b_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('b', 'B', None, None, b, b_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
+    value = value_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1, 0, 4294967292)
+    nmea2000Message.fields.append(NMEA2000Field('value', 'Value', None, None, value, value_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 32
 
-    # 6:c | Offset: 32, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 32
-    c = c_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
-    nmea2000Message.fields.append(NMEA2000Field('c', 'C', None, None, c, c_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 16
-
-    # 7:d | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 48
-    d = d_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('d', 'D', None, None, d, d_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
-
-    # 8:reserved_56 | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    # 6:reserved_56 | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 56
     reserved_56 = reserved_56_raw = decode_int(_data_raw_, running_bit_offset, 8)
     nmea2000Message.fields.append(NMEA2000Field('reserved_56', 'Reserved', None, None, reserved_56, reserved_56_raw, None, FieldTypes.RESERVED, False))
@@ -22904,10 +23443,10 @@ def encode_pgn_65302(nmea2000Message: NMEA2000Message) -> bytes:
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # a | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    # type | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("a")
+    field = nmea2000Message.get_field_by_id("type")
 
     advance_running_offset = True
     if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
@@ -22920,89 +23459,37 @@ def encode_pgn_65302(nmea2000Message: NMEA2000Message) -> bytes:
     field_bit_length = 8
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'A' cannot be negative")
+        raise ValueError("Cant encode this message, 'Type' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'A' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Type' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'A' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Type' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # b | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
+    # value | Offset: 24, Length: 32, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 24
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("b")
+    field = nmea2000Message.get_field_by_id("value")
 
     advance_running_offset = True
     if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 8, False)
+        field_value = encode_number_raw(field.raw_value, 32, False)
     elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 8, False, 1)
+        field_value = encode_number(field.raw_value, 32, False, 1)
     else:
         assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 8, False, 1)
-    field_bit_length = 8
+        field_value = encode_number(field.value, 32, False, 1)
+    field_bit_length = 32
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'B' cannot be negative")
+        raise ValueError("Cant encode this message, 'Value' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'B' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Value' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'B' exceeds the encoded bit length")
-    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
-    data_raw |= (field_value & field_mask) << field_offset
-    payload_end_offset = field_offset + field_bit_length
-    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
-    payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # c | Offset: 32, Length: 16, Resolution: 1, Field Type: NUMBER
-    running_bit_offset = 32
-    field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("c")
-
-    advance_running_offset = True
-    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 16, False)
-    elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 16, False, 1)
-    else:
-        assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 16, False, 1)
-    field_bit_length = 16
-    assert isinstance(field_value, int)
-    if field_value < 0:
-        raise ValueError("Cant encode this message, 'C' cannot be negative")
-    if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'C' has a negative bit length")
-    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'C' exceeds the encoded bit length")
-    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
-    data_raw |= (field_value & field_mask) << field_offset
-    payload_end_offset = field_offset + field_bit_length
-    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
-    payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # d | Offset: 48, Length: 8, Resolution: 1, Field Type: NUMBER
-    running_bit_offset = 48
-    field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("d")
-
-    advance_running_offset = True
-    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 8, False)
-    elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 8, False, 1)
-    else:
-        assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 8, False, 1)
-    field_bit_length = 8
-    assert isinstance(field_value, int)
-    if field_value < 0:
-        raise ValueError("Cant encode this message, 'D' cannot be negative")
-    if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'D' has a negative bit length")
-    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'D' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Value' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -27093,7 +27580,7 @@ def is_fast_pgn_65340() -> bool:
     return False
 def decode_pgn_65340(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
     """Decode PGN 65340."""
-    nmea2000Message = NMEA2000Message(PGN=65340, id='simnetApUnknown2', description='Simnet: AP Unknown 2', ttl=timedelta(milliseconds=1000))
+    nmea2000Message = NMEA2000Message(PGN=65340, id='simnetAutopilotModeState', description='Simnet: Autopilot Mode State', ttl=timedelta(milliseconds=1000))
     running_bit_offset = 0
     # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
     running_bit_offset = 0
@@ -27115,16 +27602,18 @@ def decode_pgn_65340(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Messag
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 4:mode_class | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    a = a_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('a', 'A', None, None, a, a_raw, None, FieldTypes.NUMBER, False))
+    mode_class_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    mode_class = master_dict['SIMNET_AUTOPILOT_MODE_CLASS'].get(mode_class_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('modeClass', 'Mode Class', None, None, mode_class, mode_class_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 8
 
-    # 5:b | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:mode | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 24
-    b = b_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('b', 'B', None, None, b, b_raw, None, FieldTypes.NUMBER, False))
+    mode_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    mode = master_dict['SIMNET_AUTOPILOT_MODE'].get(mode_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('mode', 'Mode', None, None, mode, mode_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 8
 
     # 6:c | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
@@ -27139,16 +27628,16 @@ def decode_pgn_65340(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Messag
     nmea2000Message.fields.append(NMEA2000Field('d', 'D', None, None, d, d_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 8:e | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 8:spare | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: SPARE, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 48
-    e = e_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('e', 'E', None, None, e, e_raw, None, FieldTypes.NUMBER, False))
+    spare = spare_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('spare8', 'Spare', None, None, spare, spare_raw, None, FieldTypes.SPARE, False))
     running_bit_offset += 8
 
-    # 9:reserved_56 | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    # 9:flags | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 56
-    reserved_56 = reserved_56_raw = decode_int(_data_raw_, running_bit_offset, 8)
-    nmea2000Message.fields.append(NMEA2000Field('reserved_56', 'Reserved', None, None, reserved_56, reserved_56_raw, None, FieldTypes.RESERVED, False))
+    flags = flags_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('flags', 'Flags', None, None, flags, flags_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
     return nmea2000Message
@@ -27232,53 +27721,51 @@ def encode_pgn_65340(nmea2000Message: NMEA2000Message) -> bytes:
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # a | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    # modeClass | Offset: 16, Length: 8, Resolution: 1, Field Type: LOOKUP
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("a")
+    field = nmea2000Message.get_field_by_id("modeClass")
 
     advance_running_offset = True
-    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 8, False)
-    elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 8, False, 1)
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
     else:
-        assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 8, False, 1)
+        field_value = lookup_encode_SIMNET_AUTOPILOT_MODE_CLASS(field.value)
     field_bit_length = 8
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'A' cannot be negative")
+        raise ValueError("Cant encode this message, 'Mode Class' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'A' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Mode Class' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'A' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Mode Class' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # b | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
+    # mode | Offset: 24, Length: 8, Resolution: 1, Field Type: LOOKUP
     running_bit_offset = 24
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("b")
+    field = nmea2000Message.get_field_by_id("mode")
 
     advance_running_offset = True
-    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 8, False)
-    elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 8, False, 1)
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
     else:
-        assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 8, False, 1)
+        field_value = lookup_encode_SIMNET_AUTOPILOT_MODE(field.value)
     field_bit_length = 8
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'B' cannot be negative")
+        raise ValueError("Cant encode this message, 'Mode' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'B' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Mode' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'B' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Mode' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -27336,10 +27823,34 @@ def encode_pgn_65340(nmea2000Message: NMEA2000Message) -> bytes:
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # e | Offset: 48, Length: 8, Resolution: 1, Field Type: NUMBER
+    # spare8 | Offset: 48, Length: 8, Resolution: 1, Field Type: SPARE
     running_bit_offset = 48
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("e")
+    field = nmea2000Message.get_field_by_id("spare8")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Spare' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Spare' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Spare' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Spare' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # flags | Offset: 56, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 56
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("flags")
 
     advance_running_offset = True
     if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
@@ -27352,35 +27863,11 @@ def encode_pgn_65340(nmea2000Message: NMEA2000Message) -> bytes:
     field_bit_length = 8
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'E' cannot be negative")
+        raise ValueError("Cant encode this message, 'Flags' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'E' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Flags' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'E' exceeds the encoded bit length")
-    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
-    data_raw |= (field_value & field_mask) << field_offset
-    payload_end_offset = field_offset + field_bit_length
-    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
-    payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # reserved_56 | Offset: 56, Length: 8, Resolution: 1, Field Type: RESERVED
-    running_bit_offset = 56
-    field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("reserved_56")
-
-    advance_running_offset = True
-    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
-    if field_value is None:
-        field_value = 0
-    if not isinstance(field_value, int):
-        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
-    field_bit_length = 8
-    assert isinstance(field_value, int)
-    if field_value < 0:
-        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
-    if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
-    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Flags' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -31073,35 +31560,35 @@ def decode_pgn_65420(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Messag
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:a | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 4:value | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    a = a_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('a', 'A', None, None, a, a_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
+    value = value_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
+    nmea2000Message.fields.append(NMEA2000Field('value', 'Value', None, None, value, value_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 16
 
-    # 5:b | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
-    running_bit_offset = 24
-    b = b_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('b', 'B', None, None, b, b_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
-
-    # 6:c | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:c | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 32
     c = c_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
     nmea2000Message.fields.append(NMEA2000Field('c', 'C', None, None, c, c_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 7:d | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 6:d | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 40
     d = d_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
     nmea2000Message.fields.append(NMEA2000Field('d', 'D', None, None, d, d_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 8:e | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 7:sub_index | Offset: 48, Length: 4, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 48
-    e = e_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('e', 'E', None, None, e, e_raw, None, FieldTypes.NUMBER, False))
-    running_bit_offset += 8
+    sub_index = sub_index_raw = decode_number(_data_raw_, running_bit_offset, 4, False, 1, 0, 13)
+    nmea2000Message.fields.append(NMEA2000Field('subIndex', 'Sub Index', "Selects the reported variable (0 and 1 seen)", None, sub_index, sub_index_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 4
+
+    # 8:reserved_52 | Offset: 52, Length: 4, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 52
+    reserved_52 = reserved_52_raw = decode_int(_data_raw_, running_bit_offset, 4)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_52', 'Reserved', None, None, reserved_52, reserved_52_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 4
 
     # 9:reserved_56 | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 56
@@ -31190,53 +31677,27 @@ def encode_pgn_65420(nmea2000Message: NMEA2000Message) -> bytes:
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # a | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    # value | Offset: 16, Length: 16, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("a")
+    field = nmea2000Message.get_field_by_id("value")
 
     advance_running_offset = True
     if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 8, False)
+        field_value = encode_number_raw(field.raw_value, 16, False)
     elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 8, False, 1)
+        field_value = encode_number(field.raw_value, 16, False, 1)
     else:
         assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 8, False, 1)
-    field_bit_length = 8
+        field_value = encode_number(field.value, 16, False, 1)
+    field_bit_length = 16
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'A' cannot be negative")
+        raise ValueError("Cant encode this message, 'Value' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'A' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Value' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'A' exceeds the encoded bit length")
-    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
-    data_raw |= (field_value & field_mask) << field_offset
-    payload_end_offset = field_offset + field_bit_length
-    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
-    payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # b | Offset: 24, Length: 8, Resolution: 1, Field Type: NUMBER
-    running_bit_offset = 24
-    field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("b")
-
-    advance_running_offset = True
-    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 8, False)
-    elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 8, False, 1)
-    else:
-        assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 8, False, 1)
-    field_bit_length = 8
-    assert isinstance(field_value, int)
-    if field_value < 0:
-        raise ValueError("Cant encode this message, 'B' cannot be negative")
-    if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'B' has a negative bit length")
-    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'B' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Value' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -31294,27 +31755,51 @@ def encode_pgn_65420(nmea2000Message: NMEA2000Message) -> bytes:
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # e | Offset: 48, Length: 8, Resolution: 1, Field Type: NUMBER
+    # subIndex | Offset: 48, Length: 4, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 48
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("e")
+    field = nmea2000Message.get_field_by_id("subIndex")
 
     advance_running_offset = True
     if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
-        field_value = encode_number_raw(field.raw_value, 8, False)
+        field_value = encode_number_raw(field.raw_value, 4, False)
     elif isinstance(field.raw_value, (int, float)):
-        field_value = encode_number(field.raw_value, 8, False, 1)
+        field_value = encode_number(field.raw_value, 4, False, 1)
     else:
         assert field.value is None or isinstance(field.value, (int, float))
-        field_value = encode_number(field.value, 8, False, 1)
-    field_bit_length = 8
+        field_value = encode_number(field.value, 4, False, 1)
+    field_bit_length = 4
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'E' cannot be negative")
+        raise ValueError("Cant encode this message, 'Sub Index' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'E' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Sub Index' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'E' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Sub Index' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_52 | Offset: 52, Length: 4, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 52
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_52")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 4
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -115011,12 +115496,12 @@ def decode_pgn_130819(data_raw: int, data_length_bits: int | None = None) -> NME
         ):
         return decode_pgn_130819_webastoHvacCommand(data_raw, data_length_bits)
     
-    # bepMarineProprietaryPgn130819 | Description: BEP Marine: Proprietary PGN 130819
+    # bepMarineCzone130819 | Description: BEP Marine: CZone 130819
     if (
         (((data_raw >> 0) & 0x7FF) == 295) and
         (((data_raw >> 13) & 0x7) == 4)
         ):
-        return decode_pgn_130819_bepMarineProprietaryPgn130819(data_raw, data_length_bits)
+        return decode_pgn_130819_bepMarineCzone130819(data_raw, data_length_bits)
     
     
     return None
@@ -115967,9 +116452,9 @@ def encode_pgn_130819_webastoHvacCommand(nmea2000Message: NMEA2000Message) -> by
     payload_bit_length = max(payload_bit_length, payload_end_offset)
     return data_raw.to_bytes(9, byteorder="little")
 
-def decode_pgn_130819_bepMarineProprietaryPgn130819(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
+def decode_pgn_130819_bepMarineCzone130819(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
     """Decode PGN 130819."""
-    nmea2000Message = NMEA2000Message(PGN=130819, id='bepMarineProprietaryPgn130819', description='BEP Marine: Proprietary PGN 130819')
+    nmea2000Message = NMEA2000Message(PGN=130819, id='bepMarineCzone130819', description='BEP Marine: CZone 130819')
     running_bit_offset = 0
     # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 295, PartOfPrimaryKey: ,
     running_bit_offset = 0
@@ -115991,15 +116476,57 @@ def decode_pgn_130819_bepMarineProprietaryPgn130819(_data_raw_: int, _data_lengt
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:data | Offset: 16, Length: 1768, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    # 4:field_a | Offset: 16, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    data = data_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 1768))
-    nmea2000Message.fields.append(NMEA2000Field('data', 'Data', None, None, data, data_raw, None, FieldTypes.BINARY, False))
-    running_bit_offset += 1768
+    field_a = field_a_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
+    nmea2000Message.fields.append(NMEA2000Field('fieldA', 'Field A', "uint16 LE; purpose unverified", None, field_a, field_a_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 16
+
+    # 5:field_b | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 32
+    field_b = field_b_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('fieldB', 'Field B', "Pass-through byte; purpose unverified", None, field_b, field_b_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 6:field_c | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 40
+    field_c = field_c_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('fieldC', 'Field C', "Pass-through byte; purpose unverified", None, field_c, field_c_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 7:field_d | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 48
+    field_d = field_d_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('fieldD', 'Field D', "Pass-through byte; purpose unverified", None, field_d, field_d_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 8:field_e | Offset: 56, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 56
+    field_e = field_e_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
+    nmea2000Message.fields.append(NMEA2000Field('fieldE', 'Field E', "uint16 LE; purpose unverified", None, field_e, field_e_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 16
+
+    # 9:field_f | Offset: 72, Length: 32, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 72
+    field_f = field_f_raw = decode_number(_data_raw_, running_bit_offset, 32, False, 1, 0, 4294967292)
+    nmea2000Message.fields.append(NMEA2000Field('fieldF', 'Field F', "uint32 LE; top byte always 0 (effectively 24-bit). Purpose unverified.", None, field_f, field_f_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 32
+
+    # 10:field_g | Offset: 104, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 104
+    field_g = field_g_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('fieldG', 'Field G', "Pass-through byte; purpose unverified", None, field_g, field_g_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 11:flag | Offset: 112, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 112
+    flag = flag_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('flag', 'Flag', "Boolean encoded as 0xFE = false, 0xFF = true; purpose unverified", None, flag, flag_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
 
     return nmea2000Message
 
-def encode_pgn_130819_bepMarineProprietaryPgn130819(nmea2000Message: NMEA2000Message) -> bytes:
+def encode_pgn_130819_bepMarineCzone130819(nmea2000Message: NMEA2000Message) -> bytes:
     """Encode Nmea2000Message object to binary data for PGN 130819."""
     data_raw = 0
     running_bit_offset = 0
@@ -116078,28 +116605,215 @@ def encode_pgn_130819_bepMarineProprietaryPgn130819(nmea2000Message: NMEA2000Mes
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # data | Offset: 16, Length: 1768, Resolution: 1, Field Type: BINARY
+    # fieldA | Offset: 16, Length: 16, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("data")
+    field = nmea2000Message.get_field_by_id("fieldA")
 
     advance_running_offset = True
-    field_bytes = normalize_binary_data(field.raw_value) if isinstance(field.raw_value, (bytes, bytearray, memoryview)) else normalize_binary_data(field.value)
-    field_value = encode_binary_data(field_bytes)
-    field_bit_length = 1768
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 16, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 16, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 16, False, 1)
+    field_bit_length = 16
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'Data' cannot be negative")
+        raise ValueError("Cant encode this message, 'Field A' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Data' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Field A' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Data' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Field A' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    return data_raw.to_bytes(223, byteorder="little")
+    # fieldB | Offset: 32, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 32
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("fieldB")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field B' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field B' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field B' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # fieldC | Offset: 40, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 40
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("fieldC")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field C' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field C' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field C' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # fieldD | Offset: 48, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 48
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("fieldD")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field D' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field D' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field D' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # fieldE | Offset: 56, Length: 16, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 56
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("fieldE")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 16, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 16, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 16, False, 1)
+    field_bit_length = 16
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field E' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field E' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field E' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # fieldF | Offset: 72, Length: 32, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 72
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("fieldF")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 32, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 32, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 32, False, 1)
+    field_bit_length = 32
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field F' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field F' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field F' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # fieldG | Offset: 104, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 104
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("fieldG")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Field G' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Field G' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Field G' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # flag | Offset: 112, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 112
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("flag")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Flag' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Flag' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Flag' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    return data_raw.to_bytes(15, byteorder="little")
 
 
 def is_fast_pgn_130820() -> bool:
@@ -116107,12 +116821,12 @@ def is_fast_pgn_130820() -> bool:
     return True
 # Complex PGN. number of matches: 42
 def decode_pgn_130820(data_raw: int, data_length_bits: int | None = None) -> NMEA2000Message | None:
-    # bepMarineCzoneEnumerationReply | Description: BEP Marine: CZone Enumeration Reply
+    # bepMarineCzoneAlarmStringResponse | Description: BEP Marine: CZone Alarm String Response
     if (
         (((data_raw >> 0) & 0x7FF) == 295) and
         (((data_raw >> 13) & 0x7) == 4)
         ):
-        return decode_pgn_130820_bepMarineCzoneEnumerationReply(data_raw, data_length_bits)
+        return decode_pgn_130820_bepMarineCzoneAlarmStringResponse(data_raw, data_length_bits)
     
     # simnetReprogramStatus | Description: Simnet: Reprogram Status
     if (
@@ -116442,9 +117156,9 @@ def decode_pgn_130820(data_raw: int, data_length_bits: int | None = None) -> NME
     
     return None
     
-def decode_pgn_130820_bepMarineCzoneEnumerationReply(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
+def decode_pgn_130820_bepMarineCzoneAlarmStringResponse(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
     """Decode PGN 130820."""
-    nmea2000Message = NMEA2000Message(PGN=130820, id='bepMarineCzoneEnumerationReply', description='BEP Marine: CZone Enumeration Reply')
+    nmea2000Message = NMEA2000Message(PGN=130820, id='bepMarineCzoneAlarmStringResponse', description='BEP Marine: CZone Alarm String Response')
     running_bit_offset = 0
     # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 295, PartOfPrimaryKey: ,
     running_bit_offset = 0
@@ -116466,27 +117180,27 @@ def decode_pgn_130820_bepMarineCzoneEnumerationReply(_data_raw_: int, _data_leng
     nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
     running_bit_offset += 3
 
-    # 4:query_type | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 4:device_id | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 16
-    query_type = query_type_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
-    nmea2000Message.fields.append(NMEA2000Field('queryType', 'Query Type', "Echoes the Query Type byte from the triggering PGN 65299", None, query_type, query_type_raw, None, FieldTypes.NUMBER, False))
+    device_id = device_id_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('deviceId', 'Device ID', "Device / source module id, echoed from the triggering PGN 65299", None, device_id, device_id_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 8
 
-    # 5:index | Offset: 24, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    # 5:channel | Offset: 24, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 24
-    index = index_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
-    nmea2000Message.fields.append(NMEA2000Field('index', 'Index', "Echoes the Index field from the triggering PGN 65299; (instance, sub-instance) pair", None, index, index_raw, None, FieldTypes.NUMBER, False))
+    channel = channel_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
+    nmea2000Message.fields.append(NMEA2000Field('channel', 'Channel', "Channel / alarm id, echoed from the triggering PGN 65299", None, channel, channel_raw, None, FieldTypes.NUMBER, False))
     running_bit_offset += 16
 
-    # 6:label | Offset: 40, Length: 1736, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
+    # 6:string | Offset: 40, Length: 1736, Signed: False Resolution: 1, Field Type: BINARY, Match: , PartOfPrimaryKey: ,
     running_bit_offset = 40
-    label = label_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 1736))
-    nmea2000Message.fields.append(NMEA2000Field('label', 'Label', "Variable-length label (up to 217 bytes); ASCII or UTF-8 not yet confirmed", None, label, label_raw, None, FieldTypes.BINARY, False))
+    string = string_raw = int_to_bytes(decode_int(_data_raw_, running_bit_offset, 1736))
+    nmea2000Message.fields.append(NMEA2000Field('string', 'String', "Variable-length NUL-terminated alarm string (up to 217 bytes); ASCII or UTF-8 not yet confirmed", None, string, string_raw, None, FieldTypes.BINARY, False))
     running_bit_offset += 1736
 
     return nmea2000Message
 
-def encode_pgn_130820_bepMarineCzoneEnumerationReply(nmea2000Message: NMEA2000Message) -> bytes:
+def encode_pgn_130820_bepMarineCzoneAlarmStringResponse(nmea2000Message: NMEA2000Message) -> bytes:
     """Encode Nmea2000Message object to binary data for PGN 130820."""
     data_raw = 0
     running_bit_offset = 0
@@ -116565,10 +117279,10 @@ def encode_pgn_130820_bepMarineCzoneEnumerationReply(nmea2000Message: NMEA2000Me
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # queryType | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    # deviceId | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 16
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("queryType")
+    field = nmea2000Message.get_field_by_id("deviceId")
 
     advance_running_offset = True
     if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
@@ -116581,20 +117295,20 @@ def encode_pgn_130820_bepMarineCzoneEnumerationReply(nmea2000Message: NMEA2000Me
     field_bit_length = 8
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'Query Type' cannot be negative")
+        raise ValueError("Cant encode this message, 'Device ID' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Query Type' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Device ID' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Query Type' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Device ID' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # index | Offset: 24, Length: 16, Resolution: 1, Field Type: NUMBER
+    # channel | Offset: 24, Length: 16, Resolution: 1, Field Type: NUMBER
     running_bit_offset = 24
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("index")
+    field = nmea2000Message.get_field_by_id("channel")
 
     advance_running_offset = True
     if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
@@ -116607,20 +117321,20 @@ def encode_pgn_130820_bepMarineCzoneEnumerationReply(nmea2000Message: NMEA2000Me
     field_bit_length = 16
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'Index' cannot be negative")
+        raise ValueError("Cant encode this message, 'Channel' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Index' has a negative bit length")
+        raise ValueError("Cant encode this message, 'Channel' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Index' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'Channel' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
     running_bit_offset = payload_end_offset if advance_running_offset else field_offset
     payload_bit_length = max(payload_bit_length, payload_end_offset)
-    # label | Offset: 40, Length: 1736, Resolution: 1, Field Type: BINARY
+    # string | Offset: 40, Length: 1736, Resolution: 1, Field Type: BINARY
     running_bit_offset = 40
     field_offset = running_bit_offset
-    field = nmea2000Message.get_field_by_id("label")
+    field = nmea2000Message.get_field_by_id("string")
 
     advance_running_offset = True
     field_bytes = normalize_binary_data(field.raw_value) if isinstance(field.raw_value, (bytes, bytearray, memoryview)) else normalize_binary_data(field.value)
@@ -116628,11 +117342,11 @@ def encode_pgn_130820_bepMarineCzoneEnumerationReply(nmea2000Message: NMEA2000Me
     field_bit_length = 1736
     assert isinstance(field_value, int)
     if field_value < 0:
-        raise ValueError("Cant encode this message, 'Label' cannot be negative")
+        raise ValueError("Cant encode this message, 'String' cannot be negative")
     if field_bit_length < 0:
-        raise ValueError("Cant encode this message, 'Label' has a negative bit length")
+        raise ValueError("Cant encode this message, 'String' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
-        raise ValueError("Cant encode this message, 'Label' exceeds the encoded bit length")
+        raise ValueError("Cant encode this message, 'String' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
@@ -144505,7 +145219,38 @@ def encode_pgn_130850_simnetEvent(nmea2000Message: NMEA2000Message) -> bytes:
 def is_fast_pgn_130851() -> bool:
     """Return True if PGN 130851 is a fast PGN."""
     return True
-def decode_pgn_130851(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
+# Complex PGN. number of matches: 3
+def decode_pgn_130851(data_raw: int, data_length_bits: int | None = None) -> NMEA2000Message | None:
+    # simnetEventReplyApCommand | Description: Simnet: Event Reply: AP command
+    if (
+        (((data_raw >> 0) & 0x7FF) == 1857) and
+        (((data_raw >> 13) & 0x7) == 4) and
+        (((data_raw >> 16) & 0xFF) == 2)
+        ):
+        return decode_pgn_130851_simnetEventReplyApCommand(data_raw, data_length_bits)
+    
+    # simnetApCommandReplyChangeCourse | Description: Simnet: AP command Reply: Change Course
+    if (
+        (((data_raw >> 0) & 0x7FF) == 1857) and
+        (((data_raw >> 13) & 0x7) == 4) and
+        (((data_raw >> 32) & 0xFF) == 255) and
+        (((data_raw >> 40) & 0xFF) == 10) and
+        (((data_raw >> 48) & 0xFF) == 26)
+        ):
+        return decode_pgn_130851_simnetApCommandReplyChangeCourse(data_raw, data_length_bits)
+    
+    # simnetApCommandReply | Description: Simnet: AP command Reply
+    if (
+        (((data_raw >> 0) & 0x7FF) == 1857) and
+        (((data_raw >> 13) & 0x7) == 4) and
+        (((data_raw >> 32) & 0xFF) == 255)
+        ):
+        return decode_pgn_130851_simnetApCommandReply(data_raw, data_length_bits)
+    
+    
+    return None
+    
+def decode_pgn_130851_simnetEventReplyApCommand(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
     """Decode PGN 130851."""
     nmea2000Message = NMEA2000Message(PGN=130851, id='simnetEventReplyApCommand', description='Simnet: Event Reply: AP command')
     running_bit_offset = 0
@@ -144582,7 +145327,7 @@ def decode_pgn_130851(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Messa
 
     return nmea2000Message
 
-def encode_pgn_130851(nmea2000Message: NMEA2000Message) -> bytes:
+def encode_pgn_130851_simnetEventReplyApCommand(nmea2000Message: NMEA2000Message) -> bytes:
     """Encode Nmea2000Message object to binary data for PGN 130851."""
     data_raw = 0
     running_bit_offset = 0
@@ -144861,6 +145606,784 @@ def encode_pgn_130851(nmea2000Message: NMEA2000Message) -> bytes:
         raise ValueError("Cant encode this message, 'G' has a negative bit length")
     if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
         raise ValueError("Cant encode this message, 'G' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    return data_raw.to_bytes(12, byteorder="little")
+
+def decode_pgn_130851_simnetApCommandReplyChangeCourse(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
+    """Decode PGN 130851."""
+    nmea2000Message = NMEA2000Message(PGN=130851, id='simnetApCommandReplyChangeCourse', description='Simnet: AP command Reply: Change Course')
+    running_bit_offset = 0
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
+    running_bit_offset = 0
+    manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
+    manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 11
+
+    # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 11
+    reserved_11 = reserved_11_raw = decode_int(_data_raw_, running_bit_offset, 2)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 2
+
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
+    running_bit_offset = 13
+    industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
+    industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 3
+
+    # 4:address | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 16
+    address = address_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('address', 'Address', "NMEA 2000 address of the autopilot that ran the command", None, address, address_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 5:reserved_24 | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 24
+    reserved_24 = reserved_24_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_24', 'Reserved', None, None, reserved_24, reserved_24_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 8
+
+    # 6:proprietary_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 255, PartOfPrimaryKey: True,
+    running_bit_offset = 32
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    proprietary_id = master_dict['SIMNET_EVENT_COMMAND'].get(proprietary_id_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Autopilot", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 8
+
+    # 7:command_type | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 10, PartOfPrimaryKey: ,
+    running_bit_offset = 40
+    command_type_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    command_type = master_dict['SIMNET_AP_COMMAND_TYPE'].get(command_type_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('commandType', 'Command Type', "AP Command", None, command_type, command_type_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    # 8:event | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 26, PartOfPrimaryKey: ,
+    running_bit_offset = 48
+    event_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    event = master_dict['SIMNET_AP_EVENTS'].get(event_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('event', 'Event', "Change course", None, event, event_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    # 9:spare | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: SPARE, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 56
+    spare = spare_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('spare9', 'Spare', None, None, spare, spare_raw, None, FieldTypes.SPARE, False))
+    running_bit_offset += 8
+
+    # 10:direction | Offset: 64, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 64
+    direction_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    direction = master_dict['SIMNET_DIRECTION'].get(direction_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('direction', 'Direction', None, None, direction, direction_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    # 11:angle | Offset: 72, Length: 16, Signed: False Resolution: 0.0001, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 72
+    angle = angle_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 0.0001, 0, 6.2831852)
+    nmea2000Message.fields.append(NMEA2000Field('angle', 'Angle', "Absolute change in desired attitude, generally 1 or 10 degrees", 'rad', angle, angle_raw, PhysicalQuantities.ANGLE, FieldTypes.NUMBER, False))
+    running_bit_offset += 16
+
+    # 12:reserved_88 | Offset: 88, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 88
+    reserved_88 = reserved_88_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_88', 'Reserved', None, None, reserved_88, reserved_88_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 8
+
+    return nmea2000Message
+
+def encode_pgn_130851_simnetApCommandReplyChangeCourse(nmea2000Message: NMEA2000Message) -> bytes:
+    """Encode Nmea2000Message object to binary data for PGN 130851."""
+    data_raw = 0
+    running_bit_offset = 0
+    payload_bit_length = 0
+    # manufacturerCode | Offset: 0, Length: 11, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 0
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("manufacturerCode")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_MANUFACTURER_CODE(field.value)
+    field_bit_length = 11
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Manufacturer Code' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Manufacturer Code' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Manufacturer Code' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_11 | Offset: 11, Length: 2, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 11
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_11")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 2
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # industryCode | Offset: 13, Length: 3, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 13
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("industryCode")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_INDUSTRY_CODE(field.value)
+    field_bit_length = 3
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Industry Code' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Industry Code' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Industry Code' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # address | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 16
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("address")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Address' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Address' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Address' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_24 | Offset: 24, Length: 8, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 24
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_24")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # proprietaryId | Offset: 32, Length: 8, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 32
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("proprietaryId")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_SIMNET_EVENT_COMMAND(field.value)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Proprietary ID' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Proprietary ID' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Proprietary ID' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # commandType | Offset: 40, Length: 8, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 40
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("commandType")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_SIMNET_AP_COMMAND_TYPE(field.value)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Command Type' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Command Type' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Command Type' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # event | Offset: 48, Length: 8, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 48
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("event")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_SIMNET_AP_EVENTS(field.value)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Event' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Event' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Event' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # spare9 | Offset: 56, Length: 8, Resolution: 1, Field Type: SPARE
+    running_bit_offset = 56
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("spare9")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Spare' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Spare' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Spare' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Spare' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # direction | Offset: 64, Length: 8, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 64
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("direction")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_SIMNET_DIRECTION(field.value)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Direction' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Direction' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Direction' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # angle | Offset: 72, Length: 16, Resolution: 0.0001, Field Type: NUMBER
+    running_bit_offset = 72
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("angle")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 0.0001):
+        field_value = encode_number_raw(field.raw_value, 16, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 16, False, 0.0001)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 16, False, 0.0001)
+    field_bit_length = 16
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Angle' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Angle' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Angle' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_88 | Offset: 88, Length: 8, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 88
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_88")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    return data_raw.to_bytes(12, byteorder="little")
+
+def decode_pgn_130851_simnetApCommandReply(_data_raw_: int, _data_length_bits_: int) -> NMEA2000Message:
+    """Decode PGN 130851."""
+    nmea2000Message = NMEA2000Message(PGN=130851, id='simnetApCommandReply', description='Simnet: AP command Reply')
+    running_bit_offset = 0
+    # 1:manufacturer_code | Offset: 0, Length: 11, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 1857, PartOfPrimaryKey: ,
+    running_bit_offset = 0
+    manufacturer_code_raw = decode_int(_data_raw_, running_bit_offset, 11)
+    manufacturer_code = master_dict['MANUFACTURER_CODE'].get(manufacturer_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('manufacturerCode', 'Manufacturer Code', "Simrad", None, manufacturer_code, manufacturer_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 11
+
+    # 2:reserved_11 | Offset: 11, Length: 2, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 11
+    reserved_11 = reserved_11_raw = decode_int(_data_raw_, running_bit_offset, 2)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_11', 'Reserved', None, None, reserved_11, reserved_11_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 2
+
+    # 3:industry_code | Offset: 13, Length: 3, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 4, PartOfPrimaryKey: ,
+    running_bit_offset = 13
+    industry_code_raw = decode_int(_data_raw_, running_bit_offset, 3)
+    industry_code = master_dict['INDUSTRY_CODE'].get(industry_code_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('industryCode', 'Industry Code', "Marine Industry", None, industry_code, industry_code_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 3
+
+    # 4:address | Offset: 16, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 16
+    address = address_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('address', 'Address', "NMEA 2000 address of the autopilot that ran the command", None, address, address_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 5:reserved_24 | Offset: 24, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 24
+    reserved_24 = reserved_24_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_24', 'Reserved', None, None, reserved_24, reserved_24_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 8
+
+    # 6:proprietary_id | Offset: 32, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: 255, PartOfPrimaryKey: True,
+    running_bit_offset = 32
+    proprietary_id_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    proprietary_id = master_dict['SIMNET_EVENT_COMMAND'].get(proprietary_id_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('proprietaryId', 'Proprietary ID', "Autopilot", None, proprietary_id, proprietary_id_raw, None, FieldTypes.LOOKUP, True))
+    running_bit_offset += 8
+
+    # 7:command_type | Offset: 40, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 40
+    command_type_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    command_type = master_dict['SIMNET_AP_COMMAND_TYPE'].get(command_type_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('commandType', 'Command Type', None, None, command_type, command_type_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    # 8:event | Offset: 48, Length: 8, Signed: False Resolution: 1, Field Type: LOOKUP, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 48
+    event_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    event = master_dict['SIMNET_AP_EVENTS'].get(event_raw, None)
+    nmea2000Message.fields.append(NMEA2000Field('event', 'Event', None, None, event, event_raw, None, FieldTypes.LOOKUP, False))
+    running_bit_offset += 8
+
+    # 9:spare | Offset: 56, Length: 8, Signed: False Resolution: 1, Field Type: SPARE, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 56
+    spare = spare_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('spare9', 'Spare', None, None, spare, spare_raw, None, FieldTypes.SPARE, False))
+    running_bit_offset += 8
+
+    # 10:d | Offset: 64, Length: 8, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 64
+    d = d_raw = decode_number(_data_raw_, running_bit_offset, 8, False, 1, 0, 252)
+    nmea2000Message.fields.append(NMEA2000Field('d', 'D', None, None, d, d_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 8
+
+    # 11:value | Offset: 72, Length: 16, Signed: False Resolution: 1, Field Type: NUMBER, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 72
+    value = value_raw = decode_number(_data_raw_, running_bit_offset, 16, False, 1, 0, 65532)
+    nmea2000Message.fields.append(NMEA2000Field('value', 'Value', None, None, value, value_raw, None, FieldTypes.NUMBER, False))
+    running_bit_offset += 16
+
+    # 12:reserved_88 | Offset: 88, Length: 8, Signed: False Resolution: 1, Field Type: RESERVED, Match: , PartOfPrimaryKey: ,
+    running_bit_offset = 88
+    reserved_88 = reserved_88_raw = decode_int(_data_raw_, running_bit_offset, 8)
+    nmea2000Message.fields.append(NMEA2000Field('reserved_88', 'Reserved', None, None, reserved_88, reserved_88_raw, None, FieldTypes.RESERVED, False))
+    running_bit_offset += 8
+
+    return nmea2000Message
+
+def encode_pgn_130851_simnetApCommandReply(nmea2000Message: NMEA2000Message) -> bytes:
+    """Encode Nmea2000Message object to binary data for PGN 130851."""
+    data_raw = 0
+    running_bit_offset = 0
+    payload_bit_length = 0
+    # manufacturerCode | Offset: 0, Length: 11, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 0
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("manufacturerCode")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_MANUFACTURER_CODE(field.value)
+    field_bit_length = 11
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Manufacturer Code' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Manufacturer Code' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Manufacturer Code' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_11 | Offset: 11, Length: 2, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 11
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_11")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 2
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # industryCode | Offset: 13, Length: 3, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 13
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("industryCode")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_INDUSTRY_CODE(field.value)
+    field_bit_length = 3
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Industry Code' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Industry Code' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Industry Code' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # address | Offset: 16, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 16
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("address")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Address' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Address' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Address' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_24 | Offset: 24, Length: 8, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 24
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_24")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # proprietaryId | Offset: 32, Length: 8, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 32
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("proprietaryId")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_SIMNET_EVENT_COMMAND(field.value)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Proprietary ID' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Proprietary ID' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Proprietary ID' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # commandType | Offset: 40, Length: 8, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 40
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("commandType")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_SIMNET_AP_COMMAND_TYPE(field.value)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Command Type' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Command Type' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Command Type' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # event | Offset: 48, Length: 8, Resolution: 1, Field Type: LOOKUP
+    running_bit_offset = 48
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("event")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int):
+        field_value = field.raw_value
+    elif isinstance(field.value, int):
+        field_value = field.value
+    else:
+        field_value = lookup_encode_SIMNET_AP_EVENTS(field.value)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Event' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Event' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Event' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # spare9 | Offset: 56, Length: 8, Resolution: 1, Field Type: SPARE
+    running_bit_offset = 56
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("spare9")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Spare' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Spare' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Spare' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Spare' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # d | Offset: 64, Length: 8, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 64
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("d")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 8, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 8, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 8, False, 1)
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'D' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'D' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'D' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # value | Offset: 72, Length: 16, Resolution: 1, Field Type: NUMBER
+    running_bit_offset = 72
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("value")
+
+    advance_running_offset = True
+    if isinstance(field.raw_value, int) and raw_number_matches_value(field.raw_value, field.value, 1):
+        field_value = encode_number_raw(field.raw_value, 16, False)
+    elif isinstance(field.raw_value, (int, float)):
+        field_value = encode_number(field.raw_value, 16, False, 1)
+    else:
+        assert field.value is None or isinstance(field.value, (int, float))
+        field_value = encode_number(field.value, 16, False, 1)
+    field_bit_length = 16
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Value' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Value' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Value' exceeds the encoded bit length")
+    field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
+    data_raw |= (field_value & field_mask) << field_offset
+    payload_end_offset = field_offset + field_bit_length
+    running_bit_offset = payload_end_offset if advance_running_offset else field_offset
+    payload_bit_length = max(payload_bit_length, payload_end_offset)
+    # reserved_88 | Offset: 88, Length: 8, Resolution: 1, Field Type: RESERVED
+    running_bit_offset = 88
+    field_offset = running_bit_offset
+    field = nmea2000Message.get_field_by_id("reserved_88")
+
+    advance_running_offset = True
+    field_value = field.raw_value if isinstance(field.raw_value, int) else field.value
+    if field_value is None:
+        field_value = 0
+    if not isinstance(field_value, int):
+        raise ValueError("Cant encode this message, 'Reserved' must be an integer")
+    field_bit_length = 8
+    assert isinstance(field_value, int)
+    if field_value < 0:
+        raise ValueError("Cant encode this message, 'Reserved' cannot be negative")
+    if field_bit_length < 0:
+        raise ValueError("Cant encode this message, 'Reserved' has a negative bit length")
+    if field_bit_length > 0 and field_value.bit_length() > field_bit_length:
+        raise ValueError("Cant encode this message, 'Reserved' exceeds the encoded bit length")
     field_mask = (1 << field_bit_length) - 1 if field_bit_length > 0 else 0
     data_raw |= (field_value & field_mask) << field_offset
     payload_end_offset = field_offset + field_bit_length
