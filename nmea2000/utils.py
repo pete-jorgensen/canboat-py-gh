@@ -8,6 +8,10 @@ from datetime import time
 
 logger = logging.getLogger(__name__)
 
+# Unit-conversion constants — use these instead of inlining magic numbers.
+MS_TO_KT = 3600 / 1852      # m/s to knots (exact: 1 kt = 1852 m / 3600 s)
+KELVIN_OFFSET = 273.15       # K to °C offset (canboat-py emits temps in Kelvin)
+
 
 def kelvin_to_fahrenheit(kelvin: float | None) -> float | None:
     """
@@ -100,6 +104,20 @@ def decode_int(data_raw: int, bit_offset: int, bit_length: int) -> int:
     return result
 
 
+def decode_keyed_int(data_raw: int, bit_offset: int, bit_length: int, signed: bool) -> int:
+    """Decode the integer carried by a keyed DYNAMIC_FIELD_VALUE.
+
+    Returns the plain unsigned value (identical to ``decode_int``) when ``signed`` is False
+    -- so every existing keyed value is byte-unchanged -- and the two's-complement
+    sign-extended value when True (e.g. VICTRON_VREG 0x2003 Battery Temperature). Unlike
+    ``decode_number`` it does NOT apply special-value/range masking, matching the keyed
+    path's existing raw ``decode_int * resolution`` behavior."""
+    value = decode_int(data_raw, bit_offset, bit_length)
+    if signed and bit_length > 0 and value & (1 << (bit_length - 1)):
+        value -= 1 << bit_length
+    return value
+
+
 def decode_date(days_since_epoch: int | float | None) -> date | None:
     """
     Decodes an integer representing the number of days since 1970-01-01 (UNIX epoch)
@@ -114,9 +132,18 @@ def decode_date(days_since_epoch: int | float | None) -> date | None:
     start_date = date(1970, 1, 1)
 
     # Calculate the decoded date by adding the days to the start date
-    decoded_date = start_date + timedelta(days=days_since_epoch)
+    try:
+        decoded_date = start_date + timedelta(days=days_since_epoch)
+    except (OverflowError, ValueError):
+        return None
 
-    # Format and return the date string
+    # Plausibility guard: a date outside a sane marine window is a not-acquired
+    # sentinel (e.g. AIS raw days=0 -> 1970-01-01) or a corrupt / misaligned
+    # offset, not a real date. Report not-available rather than a literal
+    # wrong date so it cannot masquerade as valid.
+    if not (2000 <= decoded_date.year <= 2100):
+        return None
+
     return decoded_date
 
 
@@ -148,9 +175,12 @@ def decode_time(seconds_since_midnight: int | float | None) -> time | None:
     # Ensure the input is treated as an integer
     seconds_since_midnight = int(seconds_since_midnight)
 
-    # Validate input
+    # Validate input: an out-of-range value is a decode failure (wrong u32 offset),
+    # not a real 00:00:00 -- report not-available rather than collapsing it to midnight,
+    # which would be indistinguishable from a legitimate midnight (consistent with
+    # decode_number's None-on-out-of-range).
     if not (0 <= seconds_since_midnight < 86400):  # There are 86400 seconds in a day
-        return time(hour=0, minute=0, second=0)
+        return None
 
     hours = seconds_since_midnight // 3600  # 3600 seconds in an hour
     minutes = (seconds_since_midnight % 3600) // 60
@@ -267,11 +297,14 @@ def decode_number(
     resolution: float,
     min_value: float,
     max_value: float,
+    offset: int = 0,
 ) -> float | None:
     """
     The function follows specific decoding rules based on the bit length of the number:
+    - 1-bit numbers have no not-present sentinel (both values are data).
     - For numbers using 2 or 3 bits, the maximum value indicates the field is not present (None is returned).
     - For numbers using 4 bits or more, the maximum positive value indicates the field is not present (None is returned).
+    `offset` is canboat's excess-K raw offset: value = (raw + offset) * resolution.
     """
     number_int = decode_int(data_raw, bit_offset, bit_length)
 
@@ -281,7 +314,7 @@ def decode_number(
         if number_int & signed_mask != 0:
             number_int -= 1 << bit_length
 
-    if bit_length <= 3:
+    if 2 <= bit_length <= 3:
         if number_int == (1 << bit_length) - 1:
             return None
     elif bit_length >= 4:
@@ -291,8 +324,8 @@ def decode_number(
         if number_int in (max_positive_value, max_positive_value - 1):
             return None
 
-    # adjust resolution
-    number_int *= resolution
+    # apply excess-K offset, then resolution
+    number_int = (number_int + offset) * resolution
 
     if number_int < min_value or number_int > max_value:
         logger.info(
@@ -307,7 +340,8 @@ def decode_number(
 
 
 def encode_number(
-    value: float | None, bit_length: int, signed: bool, resolution: float
+    value: float | None, bit_length: int, signed: bool, resolution: float,
+    offset: int = 0,
 ) -> int:
     """
     Encodes a number into a bitfield within an integer.
@@ -325,8 +359,8 @@ def encode_number(
         else:
             return (1 << bit_length) - 1
 
-    # Scale using resolution
-    number_int = int(round(value / resolution))
+    # Scale using resolution, then remove the excess-K offset (inverse of decode)
+    number_int = int(round(value / resolution)) - offset
 
     # Check bounds
     if signed:
@@ -377,14 +411,15 @@ def encode_number_raw(
 
 
 def raw_number_matches_value(
-    raw_value: int | float | None, value: float | None, resolution: float
+    raw_value: int | float | None, value: float | None, resolution: float,
+    offset: int = 0,
 ) -> bool:
     if not isinstance(raw_value, int):
         return False
     if value is None:
         return False
     return math.isclose(
-        raw_value * resolution,
+        (raw_value + offset) * resolution,
         value,
         rel_tol=0.0,
         abs_tol=max(abs(resolution) * 50, 1e-3),
@@ -426,6 +461,10 @@ def decode_string_fix_raw(
 def decode_string_lz(data_raw: int, bit_offset: int) -> str:
     data_raw = data_raw >> bit_offset
     byte_arr = data_raw.to_bytes((data_raw.bit_length() + 7) // 8, byteorder="little")
+    if not byte_arr:
+        # zero-padded / absent field: no length byte present (mirrors the
+        # len()-guard in decode_string_lau) — decode as the empty string.
+        return ""
     str_len = byte_arr[0]
     byte_arr_str = byte_arr[1 : 1 + str_len]
     decoded_str = byte_arr_str.decode("utf-8", errors="ignore")

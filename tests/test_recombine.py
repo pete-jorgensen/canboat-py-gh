@@ -79,7 +79,7 @@ def test_decode_strings_from_file_2():
             assert msg.priority == 7
             assert msg.source == 0
             assert msg.destination == 255
-            assert msg.description == "0x1EF00: Manufacturer Proprietary fast-packet addressed"
+            assert msg.description == "Garmin: GPSMAP 86xx Device Health Telemetry"
             assert msg.fields[0].value == "Garmin"
             assert msg.fields[1].value == 3
             assert msg.fields[2].value == "Marine Industry"
@@ -91,7 +91,8 @@ def test_decode_strings_from_file_2_exclude_id():
     with open("tests/recombine-frames-2.in", "r") as f:
         lines = f.read().splitlines()
 
-    decoder = _get_decoder(exclude_pgns=["0x1ef00ManufacturerProprietaryFastPacketAddressed"])
+    decoder = _get_decoder(exclude_pgns=["0x1ef00ManufacturerProprietaryFastPacketAddressed",
+                                         "garminGpsmap86xxDeviceHealthTelemetry"])
     counter = 0
     for line in lines:
         input_data = line.strip()

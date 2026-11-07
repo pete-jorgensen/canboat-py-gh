@@ -1,3 +1,9 @@
+> **This is a fork of [tomer-w/nmea2000](https://github.com/tomer-w/nmea2000).** It adds the extended NMEA 2000 decode layer (Mercury, Garmin and other manufacturer PGNs, semantic labels) on top of the upstream decoder, decode-only.
+> Read branch **`Decode-In-Progress-HyperActiveJ`**; `main` mirrors upstream unchanged.
+>
+> **The README below is upstream's**, unchanged.
+> Its install and image instructions point at upstream and will not give you the changes
+> above. To run this fork: `git clone -b Decode-In-Progress-HyperActiveJ https://github.com/pete-jorgensen/canboat-py-gh.git`.
 
 # NMEA 2000 Python Library
 

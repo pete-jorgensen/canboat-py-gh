@@ -80,9 +80,13 @@ def test_decode_date():
     assert decode_date(19635) == date(2023, 10, 5)
 
 def test_encode_decode_date():
-    test_dates = [date(2023, 10, 5), date(2000, 1, 1), date(1999, 12, 31)]
-    for test_date in test_dates:
+    # In-window dates round-trip unchanged.
+    for test_date in [date(2023, 10, 5), date(2000, 1, 1), date(2100, 12, 31)]:
         assert decode_date(encode_date(test_date)) == test_date
+    # Plausibility guard (a 2000..2100 window): an out-of-window or not-acquired date
+    # decodes to None instead of a literal wrong date, so it can't masquerade as valid.
+    assert decode_date(encode_date(date(1999, 12, 31))) is None
+    assert decode_date(0) is None  # AIS "date not acquired" sentinel (raw days=0 -> 1970)
 
 def test_encode_time():
     assert encode_time(time(14, 30, 15), 16) == 52215

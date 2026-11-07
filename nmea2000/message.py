@@ -286,6 +286,7 @@ class LookupFieldTypeEnumeration:
     unit: str | None
     bits: int
     lookup_enumeration: str | None
+    signed: bool
 
     def __init__(
         self,
@@ -295,6 +296,7 @@ class LookupFieldTypeEnumeration:
         unit: str | None,
         bits: int,
         lookup_enumeration: str | None,
+        signed: bool = False,
     ):
         self.name = name
         self.field_type = field_type
@@ -302,6 +304,10 @@ class LookupFieldTypeEnumeration:
         self.unit = unit
         self.bits = bits
         self.lookup_enumeration = lookup_enumeration
+        # When True, the keyed DYNAMIC_FIELD_VALUE is two's-complement signed. Default
+        # False keeps every existing keyed value byte-identical (unsigned); only an entry
+        # explicitly marked Signed in canboat.json flips it (e.g. VICTRON_VREG 0x2003).
+        self.signed = signed
 
 
 @dataclass

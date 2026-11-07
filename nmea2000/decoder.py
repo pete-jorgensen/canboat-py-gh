@@ -10,7 +10,7 @@ from typing import Callable, Dict, List, Optional, Tuple
 
 from .consts import PhysicalQuantities
 from .input_formats import N2KFormat, N2KInput, detect_format
-from .message import IsoName, NMEA2000Message
+from .message import IsoName, NMEA2000Message, NMEA2000Field, FieldTypes
 from . import pgns as pgns_module
 
 logger = logging.getLogger(__name__)
@@ -139,6 +139,9 @@ class DecoderBase(DecoderStaticsMixin):
         bound_format: N2KFormat | None = None,
         started_at: datetime | None = None,
         already_combined: bool = False,
+        extended: bool = False,
+        implies: bool = False,
+        emit_unknown_pgns: bool = False,
     ) -> None:
         if exclude_pgns is None:
             exclude_pgns = []
@@ -155,7 +158,19 @@ class DecoderBase(DecoderStaticsMixin):
 
         self.bound_format = bound_format
         self.already_combined = already_combined
+        # canboat-py extended structural semantics. Off by default ->
+        # output identical to upstream. extended = all (implications + command +
+        # annotations + value-notes + catalog texts + autopilot); implies = the
+        # implications + command subset only.
+        self.extended = extended
+        self.implies = implies
+        self.emit_unknown_pgns = emit_unknown_pgns
         self.data: dict[str, FastPgnMetadata] = {}
+        # Count of fast-packet frames that arrived un-reassembled in the source (the
+        # logger did not reassemble them) and were routed to in-decoder reassembly.
+        # Lets a caller check that such frames are being reassembled rather than
+        # decoded as garbage.
+        self.unreassembled_fastpacket_frames = 0
         self.dump_file = None
         self.build_network_map = build_network_map
         self.started_at = started_at or datetime.now()
@@ -371,14 +386,22 @@ class DecoderBase(DecoderStaticsMixin):
                     )
                     return None
 
-        is_fast = False
-        if not already_combined:
-            is_fast = type(self).is_fast_pgn(pgn)
+        is_fast = type(self).is_fast_pgn(pgn)
         if is_fast is None:
             self._log_unsupported_pgn_once(pgn)
-            return None
+            if not self.emit_unknown_pgns:
+                return None
+            msg = NMEA2000Message(PGN=pgn, id="unknown", description=f"Unknown PGN {pgn}")
+            wire_data = bytes(reversed(can_data))  # restore wire order (can_data is LSB-first)
+            msg.fields.append(NMEA2000Field(
+                'data', 'Data', None, None, wire_data, wire_data, None, FieldTypes.BINARY, False
+            ))
+            source_iso_name = self.source_to_iso_name.get(source_id, None)
+            msg.add_data(source_id, destination_id, priority, timestamp,
+                         source_iso_name, self.build_network_map, raw_can_data)
+            return msg
 
-        if is_fast:
+        if is_fast and not already_combined:
             return self._decode_fast_message(
                 pgn,
                 priority,
@@ -434,7 +457,23 @@ class DecoderBase(DecoderStaticsMixin):
         )
         if nmea2000_message is None:
             logger.debug("No sub-decoding function found for PGN: %s", pgn)
-            return None
+            if not self.emit_unknown_pgns:
+                return None
+            # A KNOWN PGN whose Match-dispatch matched no branch (an uncatalogued
+            # proprietary-container sub-message: a Fusion 130820 msgid, Victron 61184
+            # regId, or Mercury 130825 opcode the table doesn't name) returns None on a
+            # COMPLETE payload. Surface it as a structured 'unknown sub-message' instead
+            # of silently dropping to None, so a caller sees a real message rather
+            # than the sub-message vanishing.
+            msg = NMEA2000Message(PGN=pgn, id="unknown",
+                                  description=f"Unknown sub-message PGN {pgn}")
+            wire_data = bytes(reversed(data))  # data is LSB-first; restore wire order
+            msg.fields.append(NMEA2000Field(
+                'data', 'Data', None, None, wire_data, wire_data, None, FieldTypes.BINARY, False
+            ))
+            msg.add_data(src, dest, priority, timestamp, source_iso_name,
+                         self.build_network_map, raw_can_data)
+            return msg
 
         # Handle ISO Address Claim messages and enrichment
         if nmea2000_message.PGN == ISO_CLAIM_PGN:
@@ -475,6 +514,18 @@ class DecoderBase(DecoderStaticsMixin):
             raw_can_data,
         )
         nmea2000_message.apply_preferred_units(self.preferred_units)
+
+        # Extended structural semantics: attach the extra decode keys
+        # (implications/command/annotation/note/autopilot) the flat field model
+        # can't express. `data` is the reassembled body (for the Garmin autopilot
+        # transport). No-op unless a flag is on and a table matches.
+        if self.extended or self.implies:
+            from . import semantics
+            # `data` reaches us LSB-first (wire bytes reversed for big-endian field
+            # extraction); the autopilot transport needs WIRE order.
+            semantics.apply(nmea2000_message, bytes(reversed(data)),
+                            implications=self.extended or self.implies,
+                            annotations=self.extended)
 
         # Handle dump to file
         if (
@@ -524,6 +575,12 @@ class NMEA2000Decoder(DecoderInterface):
         if handler_cls is None:
             raise ValueError(f"Unsupported input format: {input_format}")
         return handler_cls
+
+    @property
+    def unreassembled_fastpacket_frames(self) -> int:
+        """Fast-packet frames the source logged un-reassembled that the decoder
+        reassembled in-process (0 if no delegate bound yet)."""
+        return getattr(self._delegate, "unreassembled_fastpacket_frames", 0)
 
     def _bind_delegate(self, input_format: N2KFormat) -> DecoderInterface:
         if self._delegate is None:
